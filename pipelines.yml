@@ -1,0 +1,25 @@
+resources:
+  - name: simple_test
+    type: GitRepo
+    configuration:
+      gitProvider: ranjan_github
+      path: Ranjansingh41/test 
+      
+pipelines:
+  - name: pipeline_ranjan
+    steps:
+      - name: node
+        type: Bash
+        configuration:
+          nodePool: on-demand-nodes
+          inputResources:
+            - name: simple_test
+          runtime:
+            type: image
+            image:
+              custom:
+                name: ankul/u16
+                tag: master
+        execution:
+          onExecute:
+            - printenv
